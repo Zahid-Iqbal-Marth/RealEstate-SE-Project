@@ -1,0 +1,45 @@
+{% extends "realestate/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+  <!--/ Form Search Star /-->
+  
+  <section class="intro-single_custom">
+  <div style=" padding-left: 25%; padding-right: 25%; padding-bottom: 15%;">
+
+  <div class="media">
+    <img class="rounded-circle account-img" src="{{ user.customer.image.url }}">
+    <div class="media-body">
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+    </div>
+  </div>
+  <div class="">
+    <div class="title-box-d">
+      <h3 class="title-d">Manage Profile</h3>
+    </div>
+      <form class="form-a" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-md-12 mb-2">
+            <div class="form-group">
+                {{ form_U|crispy }}
+                {{ form_P|crispy }}
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-b">Update</button>
+                <a class="btn btn-b" href="{% url 'user-profile-delete' %}" >Delete</a>
+            </div>
+        </div>
+
+      </form>
+    </div>
+ </div>
+</div>
+</section>
+  <!--/ Form Search End /-->
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "realestate/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<script src="https://js.stripe.com/v3/"></script>
+	<script>
+		var stripe = Stripe('pk_test_q0V0YGOQDA3uX0xX8dgAYH3k00U94a42H5');
+	var elements = stripe.elements();
+	var cardElement = elements.create('card');
+
+		console.log(cardElement)
+	</script>
+  
+  <section class="intro-single_custom">
+  <div style=" padding-left: 15%; padding-right: 15%; padding-bottom: 15%;">
+  <div class="">
+    <div class="title-box-d">
+      {% if messages %}
+        <ul class="messagelist">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>
+      {% endif %}
+      <h3 class="title-d">Pricing Scheme</h3>
+    </div>
+
+
+    <div class="row justify-content-between">
+    {% for pack in package %}
+        <div class="col-md-5 col-lg-4">
+          <div class="property-price d-flex justify-content-center foo">
+            <div class="card-header-c d-flex">
+              <div class="card-box-ico">
+                <span class="ion-money">$</span>
+              </div>
+              <div class="card-title-c align-self-center">
+                <h5 class="title-c">{{pack.price}}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="property-summary">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="title-box-d section-t4">
+                  <h3 class="title-d">Quick Summary</h3>
+                </div>
+              </div>
+            </div>
+            <div class="summary-list">
+              <ul class="list">
+                <li class="d-flex justify-content-between">
+                  <strong>Package Type:</strong>
+                  <span>{{pack.package_type}}</span>
+                </li>
+
+                <li class="d-flex justify-content-between">
+                    <strong>Ad Posting Limit:</strong>
+                    <span>{{pack.ad_posting_limit}}</span>
+                  </li>
+
+              </ul>
+            </div>
+          </div>
+          <div style="padding-left: 16%; padding-top: 8%; padding-bottom: 8%;">
+            {% if pack.package_type == 'Free' %}
+              {% if flag != False %}
+                <a class="btn btn-b" href="{% url 'free-sub' pack.id %}">CHECKOUT</a>
+              {% else %}
+                <a class="btn btn-b" href="#" disabled>CHECKOUT</a> 
+              {% endif %}               
+            {% else %}
+              <a class="btn btn-b" href="{% url 'checkout' pack.id %}" >CHECKOUT</a>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    </div>
+ </div>
+</section>
+
+
+{% endblock %}

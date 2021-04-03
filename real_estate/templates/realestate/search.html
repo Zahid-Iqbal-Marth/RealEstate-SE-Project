@@ -1,0 +1,106 @@
+{% extends "realestate/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+  <!--/ Form Search Star /-->
+  <section class="intro-single_custom">
+    <!--/ Form Search Star /-->
+    <div style=" padding-left: 30%; padding-right: 30%; padding-bottom: 15%;">
+
+      <div class="title-box-d">
+        <h3 class="title-d">Search Property</h3>
+      </div>
+      <form  method="POST">
+        {% csrf_token %}
+      <div class="form">
+        <form class="form-a">
+          <div class="row">
+            <div class="col-md-12 mb-2">
+              <div class="form-group">
+                <label for="Type">Status</label>
+                <select name="status" class="form-control form-control-lg form-control-a" id="Type">
+                  <option>Rent</option>
+                  <option>Sale</option>
+                </select></div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <label for="Type">Property Type</label>
+                <select name="property_type" class="form-control form-control-lg form-control-a" id="Type">
+                  <option>House</option>
+                  <option>Plot</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <label for="city">City</label>
+                <select name="city"  class="form-control form-control-lg form-control-a" id="city">
+                  {% for city in cities %}
+                    <option>{{city.location}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <label for="bedrooms">Bedrooms</label>
+                <select name="beds" class="form-control form-control-lg form-control-a" id="bedrooms">
+                  {% for beds in Num_of_beds %}
+                    <option>{{beds.beds}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <label for="garages">Garages</label>
+                <select name="garage" class="form-control form-control-lg form-control-a" id="garages">
+                  {% for garage in Num_of_garage %}
+                    <option>{{garage.garage}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <label for="bathrooms">Bathrooms</label>
+                <select name="baths" class="form-control form-control-lg form-control-a" id="bathrooms">
+                  {% for baths in Num_of_baths %}
+                    <option>{{baths.baths}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-group">
+                <label for="price">Max Price</label>
+                <select name="price" class="form-control form-control-lg form-control-a" id="pri">
+                  <option>50000</option>
+                  <option>100000</option>
+                  <option>150000</option>
+                  <option>200000</option>
+                  <option>1000000</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <button type="submit"  class="btn btn-b">Search Property</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </form>
+    </div>
+    <!--/ Form Search End /-->
+</section>
+  <!--/ Form Search End /-->
+
+
+{% endblock %}
+
+
+
